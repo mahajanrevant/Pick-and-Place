@@ -122,10 +122,49 @@ DH parameter given by __Craig, J. J.__ are used to complete this project.
 
 # Transformation Matrices
 
-All the joints have a transformation matrix which gives their relative orientation with reference to the previous joint. The TF matrix for any joint can be calculated by substituting the DH parameters in the below function
-`def TF_matrix(alpha, a, d, q):
+All the joints have a transformation matrix which gives their relative orientation with reference to the previous joint. The TF matrix for any joint can be calculated by substituting the DH parameters in the below function:-
+``` 
+    def TF_matrix(alpha, a, d, q):
     T = Matrix([[            cos(q),           -sin(q),           0,             a],
                 [ sin(q)*cos(alpha), cos(q)*cos(alpha), -sin(alpha), -sin(alpha)*d],
                 [ sin(q)*sin(alpha), cos(q)*sin(alpha),  cos(alpha),  cos(alpha)*d],
                 [                 0,                 0,           0,             1]])
-    return T`
+    return T
+```
+Individual Joints can be created as follows:-
+
+Joint 0 to 1
+```
+T0_1 = TF_matrix(alpha0, a0, d1, q1).subs(s)
+```
+Joint 1 to 2
+```
+T1_2 = TF_matrix(alpha1, a1, d2, q2).subs(s)
+```
+Joint 2 to 3
+```
+T2_3 = TF_matrix(alpha2, a2, d3, q3).subs(s)
+```
+Joint 3 to 4
+```
+T3_4 = TF_matrix(alpha3, a3, d4, q4).subs(s)
+```
+Joint 4 to 5
+```
+T4_5 = TF_matrix(alpha4, a4, d5, q5).subs(s)
+```
+Joint 5 to 6
+```
+T5_6 = TF_matrix(alpha5, a5, d6, q6).subs(s)
+```
+Joint 6 to end-effector
+```
+T6_EE = TF_matrix(alpha6, a6, d7, q7).subs(s)
+```
+
+Multiplying these joint matrices we get the joiint matrix form joint 0 to the end effector.
+```
+T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_EE
+```
+
+

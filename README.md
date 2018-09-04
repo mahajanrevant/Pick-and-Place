@@ -3,7 +3,7 @@
 
 Make sure you are using robo-nd VM or have Ubuntu+ROS installed locally.
 
-#Installation
+## Installation
 
 ### One time Gazebo setup step:
 Check the version of gazebo installed on your system using a terminal:

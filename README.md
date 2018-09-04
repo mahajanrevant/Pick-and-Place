@@ -166,5 +166,12 @@ Multiplying these joint matrices we get the joiint matrix form joint 0 to the en
 ```
 T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_EE
 ```
+## Inverse Kinematics 
+
+The inverse kinematics caclulations were done to move the end effector to the exact desired location. It is divied in two parts- __Position__ and __Orientation__. The last three joints of the Kuka arm form a spherical wrist. The first three joints move the wrist centre of the spherical wrist to the desired location.This is the position part. The last 3 joint orient themselves to grab the object of  interest. This is the orientation part.
+
+### Position
+
+
 
 

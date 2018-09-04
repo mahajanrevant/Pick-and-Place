@@ -3,7 +3,7 @@
 
 Make sure you are using robo-nd VM or have Ubuntu+ROS installed locally.
 
-##Installation
+#Installation
 
 ### One time Gazebo setup step:
 Check the version of gazebo installed on your system using a terminal:
@@ -100,4 +100,6 @@ The demo ends when the robot arm reaches at the top of the drop location.
 There is no loopback implemented yet, so you need to close all the terminal windows in order to restart.
 
 ## Introduction 
-Performing pick and place operation using kuka arm
+Robots have started to replace humans to perform manually simple and iterative steps. This project deals with a simulation of a Kuka arm to pick and drop objects. A similar challenge is performed during amazon robotics challenge. The target object is a blue cylinder that spawns on 9 different locations on the rack at random and the goal is to drop the cylinder in the bin kept right next to the robot.
+
+

@@ -102,4 +102,30 @@ There is no loopback implemented yet, so you need to close all the terminal wind
 ## Introduction 
 Robots have started to replace humans to perform manually simple and iterative steps. This project deals with a simulation of a Kuka arm to pick and drop objects. A similar challenge is performed during amazon robotics challenge. The target object is a blue cylinder that spawns on 9 different locations on the rack at random and the goal is to drop the cylinder in the bin kept right next to the robot.
 
+## Denavit-Hartenberg Diagram
+Here is a Denavit-Hartenberg (DH) diagram of the Kuka KR210 by Udacity:
 
+The arm consistes of 6 revolute joints and has a spherical wrist.
+
+## Denavit-Hartenberg Table
+DH parameter given by __Craig, J. J.__ are used to complete this project. 
+
+| n |  theta |   d   |    a   | alpha |
+|:-:|:------:|:-----:|:------:|:-----:|
+| 0 |   -    |   -   |    0   |   0   |
+| 1 | theta1 |  0.75 |  0.35  | -pi/2 |
+| 2 | theta2 |   0   |  1.25  |   0   |
+| 3 | theta3 |   0   | -0.054 | -pi/2 |
+| 4 | theta4 |  1.5  |    0   |  pi/2 |
+| 5 | theta5 |   0   |    0   | -pi/2 |
+| 6 | theta6 | 0.303 |    0   |   0   |
+
+# Transformation Matrices
+
+All the joints have a transformation matrix which gives their relative orientation with reference to the previous joint. The TF matrix for any joint can be calculated by substituting the DH parameters in the below function
+`def TF_matrix(alpha, a, d, q):
+    T = Matrix([[            cos(q),           -sin(q),           0,             a],
+                [ sin(q)*cos(alpha), cos(q)*cos(alpha), -sin(alpha), -sin(alpha)*d],
+                [ sin(q)*sin(alpha), cos(q)*sin(alpha),  cos(alpha),  cos(alpha)*d],
+                [                 0,                 0,           0,             1]])
+    return T`

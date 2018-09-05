@@ -1,9 +1,10 @@
 # Robotic arm - Pick & Place project
 ---
 
-Make sure you are using robo-nd VM or have Ubuntu+ROS installed locally.
 
 ## Installation
+
+Make sure you are using robo-nd VM or have Ubuntu+ROS installed locally.
 
 ### One time Gazebo setup step:
 Check the version of gazebo installed on your system using a terminal:
@@ -102,13 +103,19 @@ There is no loopback implemented yet, so you need to close all the terminal wind
 ## Introduction 
 Robots have started to replace humans to perform manually simple and iterative steps. This project deals with a simulation of a Kuka arm to pick and drop objects. A similar challenge is performed during amazon robotics challenge. The target object is a blue cylinder that spawns on 9 different locations on the rack at random and the goal is to drop the cylinder in the bin kept right next to the robot.
 
+![full scene](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/full%20scene.PNG)
+
 ## Denavit-Hartenberg Diagram
 Here is a Denavit-Hartenberg (DH) diagram of the Kuka KR210 by Udacity:
+
+![Kuka DH](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/kuka_DH_diagram.png)
 
 The arm consistes of 6 revolute joints and has a spherical wrist.
 
 ## Denavit-Hartenberg Table
 DH parameter given by __Craig, J. J.__ are used to complete this project. 
+
+![DH Table](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/DH%20parameters.PNG)
 
 | n |  theta  |   d   |    a   | alpha |
 |:-:|:------: |:-----:|:------:|:-----:|
@@ -176,7 +183,7 @@ Joint 6 to end-effector
 T6_EE = TF_matrix(alpha6, a6, d7, q7).subs(s)
 ```
 
-Multiplying these joint matrices we get the joiint matrix form joint 0 to the end effector.
+Multiplying these joint matrices we get the joint matrix from joint 0 to the end effector.
 ```
 T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_EE
 ```
@@ -184,9 +191,16 @@ T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_EE
 
 The inverse kinematics caclulations were done to move the end effector to the exact desired location. It is divied in two parts- __Position__ and __Orientation__. The last three joints of the Kuka arm form a spherical wrist. The first three joints move the wrist centre of the spherical wrist to the desired location.This is the position part. The last 3 joint orient themselves to grab the object of  interest. This is the orientation part.The required steps to solve the problem are given below
 
+![Inverse](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/Inverse.PNG)
+
+
 ### Position Inverse Kinematics
 
+![theta1](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/theta1.jpg)
+
 `theta1 = atan2(WC[1], WC[0])`
+
+![theta2](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/theta2.jpg)
 
 ```
  angle_a = acos((b*b + c*c - a*a) / (2*b*c))
@@ -194,6 +208,8 @@ The inverse kinematics caclulations were done to move the end effector to the ex
     
  theta2 = pi/2 - angle_a - atan2(b_z, b_xy)
 ```
+![theta3](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/theta3.jpg)
+
 
 `theta3 = pi/2 - (angle_b + 0.036)`
 
@@ -238,6 +254,13 @@ You must now press `Next` in the Rviz window to have each step proceed. A text w
 ## Results 
 
 The arm was sucessfully able to drop 10/10 objects in the bin without being far off the given trajectory.
+
+![10](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/10.PNG)
+
+![picking](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/picking.PNG)
+
+![grasping](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/grasping.PNG)
+
 
 ## Improvements
 

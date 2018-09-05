@@ -110,16 +110,16 @@ The arm consistes of 6 revolute joints and has a spherical wrist.
 ## Denavit-Hartenberg Table
 DH parameter given by __Craig, J. J.__ are used to complete this project. 
 
-| n |  theta |   d   |    a   | alpha |
-|:-:|:------:|:-----:|:------:|:-----:|
-| 0 |   -    |   -   |    0   |   0   |
-| 1 | theta1 |  0.75 |  0.35  | -pi/2 |
-| 2 | theta2 |   0   |  1.25  |   0   |
-| 3 | theta3 |   0   | -0.054 | -pi/2 |
-| 4 | theta4 |  1.5  |    0   |  pi/2 |
-| 5 | theta5 |   0   |    0   | -pi/2 |
-| 6 | theta6 |   0   |    0   |   0   |
-| 7 |   0    | 0.303 |    -   |   -   |
+| n |  theta  |   d   |    a   | alpha |
+|:-:|:------: |:-----:|:------:|:-----:|
+| 0 |    -    |   -   |    0   |   0   |
+| 1 |   q1    |  0.75 |  0.35  | -pi/2 |
+| 2 | q2-pi/2 |   0   |  1.25  |   0   |
+| 3 |   q3    |   0   | -0.054 | -pi/2 |
+| 4 |   q4    |  1.5  |    0   |  pi/2 |
+| 5 |   q5    |   0   |    0   | -pi/2 |
+| 6 |   q6    |   0   |    0   |   0   |
+| 7 |    0    | 0.303 |    -   |   -   |
 
 # Transformation Matrices
 

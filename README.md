@@ -101,6 +101,16 @@ The demo ends when the robot arm reaches at the top of the drop location.
 
 There is no loopback implemented yet, so you need to close all the terminal windows in order to restart.
 
+## Contents
+* [Introduction](#introduction)
+* [DH param](#denavit-hartenberg-diagram)
+* [DH table](#denavit-hartenberg-table)
+* [Trans matrix](#transformation-matrices)
+* [Inv Kin](#inverse-kinematics)
+* [Sim](#simulation)
+* [results](#results)
+* [Improv](#improvements)
+
 ## Introduction 
 Robots have started to replace humans to perform manually simple and iterative steps. This project deals with a simulation of a Kuka arm to pick and drop objects. A similar challenge is performed during amazon robotics challenge. The target object is a blue cylinder that spawns on 9 different locations on the rack at random and the goal is to drop the cylinder in the bin kept right next to the robot.
 
@@ -129,7 +139,7 @@ DH parameter given by __Craig, J. J.__ are used to complete this project.
 | 6 |   q6    |   0   |    0   |   0   |
 | 7 |    0    | 0.303 |    -   |   -   |
 
-# Transformation Matrices
+## Transformation Matrices
 
 All the joints have a transformation matrix which gives their relative orientation with reference to the previous joint. The TF matrix for any joint can be calculated by substituting the DH parameters in the below function:-
 ``` 
@@ -214,6 +224,9 @@ The inverse kinematics caclulations were done to move the end effector to the ex
 
 `theta3 = pi/2 - (angle_b + 0.036)`
 
+### Position Inverse Kinematics
+
+
 The last set of angles are found by finding appropriate values from the below rotation matrix
 
 ```
@@ -268,6 +281,7 @@ The arm was sucessfully able to drop 10/10 objects in the bin without being far 
 1. Objects should be pick and placed between shelves of the rack for a more complex task.
 2. Different objects can be put in different collection bins depending on shape, size, color
 
+---
 
 
 

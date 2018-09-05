@@ -118,7 +118,8 @@ DH parameter given by __Craig, J. J.__ are used to complete this project.
 | 3 | theta3 |   0   | -0.054 | -pi/2 |
 | 4 | theta4 |  1.5  |    0   |  pi/2 |
 | 5 | theta5 |   0   |    0   | -pi/2 |
-| 6 | theta6 | 0.303 |    0   |   0   |
+| 6 | theta6 |   0   |    0   |   0   |
+| 7 |   0    | 0.303 |    0   |   0   |
 
 # Transformation Matrices
 
@@ -131,7 +132,20 @@ All the joints have a transformation matrix which gives their relative orientati
                 [                 0,                 0,           0,             1]])
     return T
 ```
-Individual Joints can be created as follows:-
+The DH Table is implemented as a dictinary as below:
+
+```
+	s = {alpha0:       0, a0:      0, d1:  0.75, q1:     q1,
+    	    alpha1:    -pi/2, a1:   0.35, d2:     0, q2: q2-pi/2,
+     	    alpha2:        0, a2:   1.25, d3:     0, q3:     q3,
+     	    alpha3:    -pi/2, a3: -0.054, d4:   1.5, q4:     q1,
+     	    alpha4:     pi/2, a4:      0, d5:     0, q5:     q5,
+     	    alpha5:    -pi/2, a5:      0, d6:     0, q6:     q6,
+     	    alpha6:        0, a6:      0, d7: 0.303, q7:      0}
+```
+
+
+Individual Joints can be created by substituting parameters from the dictionary s as follows :-
 
 Joint 0 to 1
 ```
@@ -168,9 +182,68 @@ T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_EE
 ```
 ## Inverse Kinematics 
 
-The inverse kinematics caclulations were done to move the end effector to the exact desired location. It is divied in two parts- __Position__ and __Orientation__. The last three joints of the Kuka arm form a spherical wrist. The first three joints move the wrist centre of the spherical wrist to the desired location.This is the position part. The last 3 joint orient themselves to grab the object of  interest. This is the orientation part.
+The inverse kinematics caclulations were done to move the end effector to the exact desired location. It is divied in two parts- __Position__ and __Orientation__. The last three joints of the Kuka arm form a spherical wrist. The first three joints move the wrist centre of the spherical wrist to the desired location.This is the position part. The last 3 joint orient themselves to grab the object of  interest. This is the orientation part.The required steps to solve the problem are given below
 
-### Position
+### Position Inverse Kinematics
+
+`theta1 = atan2(WC[1], WC[0])`
+
+```
+ angle_a = acos((b*b + c*c - a*a) / (2*b*c))
+ angle_b = acos((a*a + c*c - b*b) / (2*a*c))
+    
+ theta2 = pi/2 - angle_a - atan2(b_z, b_xy)
+```
+
+`theta3 = pi/2 - (angle_b + 0.036)`
+
+The last set of angles are found by finding appropriate values from the below rotation matrix
+
+```
+R0_3 = T0_1[0:3,0:3] * T1_2[0:3,0:3] * T2_3[0:3,0:3]
+R0_3 = R0_3.evalf(subs={q1:theta1, q2:theta2, q3:theta3})
+R3_6 = R0_3.T * R_EE
+```
+
+The values of theta 3-6 are found as below:-
+
+```
+theta6 = atan2(-R3_6[1,1], R3_6[1,0])
+theta4 = atan2(R3_6[2,2], -R3_6[0,2])    
+theta5  = atan2(sqrt(R3_6[0,2]*R3_6[0,2] + R3_6[2,2]*R3_6[2,2]), R3_6[1,2])
+```
+
+## Simulation
+
+To run the [IK_server.py](IK_server.py) code, install this [Udacity Kinematics Project](https://github.com/udacity/RoboND-Kinematics-Project) code. Then change the inverse kinematics flag to `false`.
+
+To launch the simulator, run:
+
+```
+cd ~/catkin_ws/src/RoboND-Kinematics-Project/kuka_arm/scripts
+./safe_spawner.sh
+```
+
+You should see both Gazebo and Rviz launch.
+
+To run the inverse kinematic code, run the following code in a new terminal:
+
+```
+cd ~/catkin_ws/src/RoboND-Kinematics-Project/kuka_arm/scripts
+rosrun kuka_arm IK_server.py
+```
+
+You must now press `Next` in the Rviz window to have each step proceed. A text will appear above the Kuka arm after every step.
+
+## Results 
+
+The arm was sucessfully able to drop 10/10 objects in the bin without being far off the given trajectory.
+
+## Improvements
+
+1. Objects should be pick and placed between shelves of the rack for a more complex task.
+2. Different objects can be put in different collection bins depending on shape, size, color
+
 
 
 

@@ -222,6 +222,7 @@ The inverse kinematics caclulations were done to move the end effector to the ex
 
 `theta1 = atan2(WC[1], WC[0])`
 
+
 ![theta2](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/theta2.jpg)
 
 ```
@@ -230,10 +231,13 @@ The inverse kinematics caclulations were done to move the end effector to the ex
     
  theta2 = pi/2 - angle_a - atan2(b_z, b_xy)
 ```
+
+
 ![theta3](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/theta3.jpg)
 
 
 `theta3 = pi/2 - (angle_b + 0.036)`
+
 
 ### Orientation Inverse Kinematics
 

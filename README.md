@@ -217,6 +217,7 @@ The inverse kinematics caclulations were done to move the end effector to the ex
 
 ### Position Inverse Kinematics
 
+
 ![theta1](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/theta1.jpg)
 
 `theta1 = atan2(WC[1], WC[0])`

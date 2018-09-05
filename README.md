@@ -119,7 +119,7 @@ DH parameter given by __Craig, J. J.__ are used to complete this project.
 | 4 | theta4 |  1.5  |    0   |  pi/2 |
 | 5 | theta5 |   0   |    0   | -pi/2 |
 | 6 | theta6 |   0   |    0   |   0   |
-| 7 |   0    | 0.303 |    0   |   0   |
+| 7 |   0    | 0.303 |    -   |   -   |
 
 # Transformation Matrices
 

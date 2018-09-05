@@ -1,6 +1,7 @@
 # Robotic arm - Pick & Place project
 ---
 
+![gif](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/gazebo-demo.gif)
 
 ## Installation
 

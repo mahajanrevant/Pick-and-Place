@@ -215,7 +215,7 @@ theta5  = atan2(sqrt(R3_6[0,2]*R3_6[0,2] + R3_6[2,2]*R3_6[2,2]), R3_6[1,2])
 
 ## Simulation
 
-To run the [IK_server.py](IK_server.py) code, install this [Udacity Kinematics Project](https://github.com/udacity/RoboND-Kinematics-Project) code. Then change the inverse kinematics flag to `false`.
+To run your own Inverse Kinematics code change the **demo** flag described above to _"false"_ in `inverse_kinematics.launch` file under /RoboND-Kinematics-Project/kuka_arm/launch
 
 To launch the simulator, run:
 

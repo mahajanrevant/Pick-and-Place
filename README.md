@@ -102,21 +102,27 @@ The demo ends when the robot arm reaches at the top of the drop location.
 There is no loopback implemented yet, so you need to close all the terminal windows in order to restart.
 
 ## Contents
+
+
 * [Introduction](#introduction)
-* [DH param](#denavit-hartenberg-diagram)
+* [Denavit-Hartenberg Diagram](#denavit-hartenberg-diagram)
 * [DH table](#denavit-hartenberg-table)
-* [Trans matrix](#transformation-matrices)
-* [Inv Kin](#inverse-kinematics)
-* [Sim](#simulation)
-* [results](#results)
-* [Improv](#improvements)
+* [Denavit-Hartenberg Table](#transformation-matrices)
+* [Inverse Kinematics](#inverse-kinematics)
+* [Simulation](#simulation)
+* [Results](#results)
+* [Improvements](#improvements)
 
 ## Introduction 
+
+
 Robots have started to replace humans to perform manually simple and iterative steps. This project deals with a simulation of a Kuka arm to pick and drop objects. A similar challenge is performed during amazon robotics challenge. The target object is a blue cylinder that spawns on 9 different locations on the rack at random and the goal is to drop the cylinder in the bin kept right next to the robot.
 
 ![full scene](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/full%20scene.PNG)
 
 ## Denavit-Hartenberg Diagram
+
+
 Here is a Denavit-Hartenberg (DH) diagram of the Kuka KR210 by Udacity:
 
 ![Kuka DH](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/kuka_DH_diagram.png)
@@ -124,6 +130,8 @@ Here is a Denavit-Hartenberg (DH) diagram of the Kuka KR210 by Udacity:
 The arm consistes of 6 revolute joints and has a spherical wrist.
 
 ## Denavit-Hartenberg Table
+
+
 DH parameter given by __Craig, J. J.__ are used to complete this project. 
 
 ![DH Table](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/DH%20parameters.PNG)
@@ -140,6 +148,7 @@ DH parameter given by __Craig, J. J.__ are used to complete this project.
 | 7 |    0    | 0.303 |    -   |   -   |
 
 ## Transformation Matrices
+
 
 All the joints have a transformation matrix which gives their relative orientation with reference to the previous joint. The TF matrix for any joint can be calculated by substituting the DH parameters in the below function:-
 ``` 
@@ -200,6 +209,7 @@ T0_EE = T0_1 * T1_2 * T2_3 * T3_4 * T4_5 * T5_6 * T6_EE
 ```
 ## Inverse Kinematics 
 
+
 The inverse kinematics caclulations were done to move the end effector to the exact desired location. It is divied in two parts- __Position__ and __Orientation__. The last three joints of the Kuka arm form a spherical wrist. The first three joints move the wrist centre of the spherical wrist to the desired location.This is the position part. The last 3 joint orient themselves to grab the object of  interest. This is the orientation part.The required steps to solve the problem are given below
 
 ![Inverse](https://github.com/mahajanrevant/Pick-and-Place/blob/master/Pictures/Inverse.PNG)
@@ -224,8 +234,7 @@ The inverse kinematics caclulations were done to move the end effector to the ex
 
 `theta3 = pi/2 - (angle_b + 0.036)`
 
-### Position Inverse Kinematics
-
+### Orientation Inverse Kinematics
 
 The last set of angles are found by finding appropriate values from the below rotation matrix
 
